@@ -1,33 +1,14 @@
 import Game from './src/game.js';
 import View from './src/view.js'
+import Controller from './src/controller.js';
 
 const root = document.querySelector('#root');
 
 const game = new Game();
 const view = new View(root, 480, 640, 20, 10);
+const controller = new Controller(game, view);
 
 window.game = game;
 window.view = view;
+window.controller = controller;
 
-document.addEventListener('keydown', event => {
-    switch(event.code) {
-        case 'ArrowLeft': //LEFT ARROW
-            game.movePieceLeft();
-            view.render(game.getState());
-            break;
-        case 'ArrowRight': //RIGHT ARROW
-            game.movePieceRight();
-            view.render(game.getState());
-            break;
-        case 'ArrowUp': //UP ARROW
-            game.rotatePiece();
-            view.render(game.getState());
-            break;
-        case 'ArrowDown': //DOWN ARROW
-            game.movePieceDown();
-            view.render(game.getState());
-            break;
-    }
-});
-
-view.renderEndScreen(game.getState());
